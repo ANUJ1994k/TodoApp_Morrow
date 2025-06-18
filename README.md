@@ -1,12 +1,166 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Documents **Todo App with User Authentication**, integrating both frontend and backend parts:
 
-Currently, two official plugins are available:
+```markdown
+# 📝 Full-Stack Todo App with User Authentication (React + Node.js + MongoDB)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a full-featured Todo List application with user login, task tagging, priorities, mentions, filtering, sorting, notes, and data export capabilities.
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✅ User Authentication
+- Login via email/password
+- Token-based auth (JWT)
+- Session-based access to todos
+
+### 🗂️ Todos
+- Add / Edit / Delete todos
+- Add notes to each todo
+- Mention users with `@username`
+- Filter by priority, tag, or username
+- Sort by creation date or priority
+- Pagination (5 todos per page)
+
+### Filter and sorting Feature
+- Tag support: `work`, `personal`, `professional`
+- Priority levels: `High`, `Medium`, `Low`
+
+### 🛠️ Export
+- Export todos to `.json` and `.csv` format
+
+---
+
+## 🧱 Tech Stack
+
+| Layer      | Tech                          |
+|------------|-------------------------------|
+| Frontend   | React + Axios 
+| Backend    | Node.js + Express             |
+| Auth       | JWT-based token auth          |
+| Database   | MongoDB (via Mongoose)        |
+
+---
+
+## 📁 Folder Structure
+
+```
+
+📦 TODOAPP_MORROW
+├
+│   ├── TodoApp.js
+│   ├── api/
+│   │   └── axios.js
+├── backend/
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Todo.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   └── todoController.js
+│   ├── routes/
+│   │   ├── auth.routes.js
+│   │   └── todo.routes.js
+│   ├── middleware/
+│   │   └── auth.js
+│   └── server.js
+
+```
+
+---
+
+## 🔧 Backend Setup
+
+### 1. Environment Variables
+
+Create a `.env` file:
+
+```
+
+PORT=5000
+JWT\_SECRET=your\_jwt\_secret\_key
+MONGO\_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/tododb
+
+````
+
+### 2. Install Dependencies
+
+```bash
+cd backend
+npm install
+````
+
+### 3. Run Server
+
+```bash
+node server.js
+```
+
+---
+
+
+## 🌐 Frontend Setup
+
+
+### 2. Configure Axios
+
+In `api/axios.js`:
+
+
+### 3. Run React App
+
+```bash
+npm run dev
+```
+
+---
+
+## 🛠️ API Endpoints
+
+### 🔐 Auth
+
+| Method | Route            | Description          |
+| ------ | ---------------- | -------------------- |
+| POST   | `/auth/register` | Register new user    |
+| POST   | `/auth/login`    | Login, returns token |
+
+### 📝 Todos (Protected)
+
+| Method | Route              | Description          |
+| ------ | ------------------ | -------------------- |
+| GET    | `/todos`           | Fetch all user todos |
+| POST   | `/todos`           | Add new todo         |
+| PUT    | `/todos/:id`       | Update a todo        |
+| DELETE | `/todos/:id`       | Delete a todo        |
+| POST   | `/todos/:id/notes` | Add note to a todo   |
+
+> All `/todos` routes require an `Authorization: Bearer <token>` header.
+
+---
+
+## 🔐 Authentication Flow
+
+1. **Login**
+
+   * POST `/auth/login` with email/password
+   * Store returned JWT in `localStorage`
+2. **Authenticated Requests**
+
+   * Include token in header: `Authorization: Bearer <token>`
+3. **Logout**
+
+   * Remove token from `localStorage`
+
+---
+
+## 📷 Screenshots
+
+
+
+---
+
+## 👨‍💻 Author
+
+Built with ❤️ by ANUJ
+
+---
