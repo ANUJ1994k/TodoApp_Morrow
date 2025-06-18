@@ -2,7 +2,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user.model');
 
 const router = express.Router();
 
@@ -12,7 +11,7 @@ router.post('/register', async (req, res) => {
     const { username, password } = req.body;
 
     // Check if user exists
-    const existing = await User.findOne({ username });
+    const existing = await user.findOne({ username });
     if (existing) return res.status(400).json({ error: 'Username already taken' });
 
     // Create new user
